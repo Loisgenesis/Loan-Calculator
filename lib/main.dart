@@ -161,10 +161,10 @@ class _LoanAppState extends State<LoanApp> {
     principalEditingController.text = "";
     interestEditingController.text = "";
     monthsEditingController.text = "";
-   setState(() {
-     monthlyResult = 0;
-     totalResult = 0;
-   });
+    setState(() {
+      monthlyResult = 0;
+      totalResult = 0;
+    });
   }
 
   void _handleSubmitted() {
