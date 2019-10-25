@@ -1,5 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:loan/my_colors.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -37,7 +38,7 @@ class _LoanAppState extends State<LoanApp> {
         key: _scaffoldKey,
         appBar: AppBar(
           title: Text('Loan Calculator'),
-          backgroundColor: Colors.green,
+          backgroundColor: MyColors.colorPrimary,
         ),
         body: Form(
           key: _formKey,
@@ -47,6 +48,7 @@ class _LoanAppState extends State<LoanApp> {
               margin: EdgeInsets.all(padding * 2),
               child: Column(
                 children: <Widget>[
+                  getImageAsset(),
                   TextFormField(
                     controller: principalEditingController,
                     keyboardType: TextInputType.number,
@@ -107,12 +109,12 @@ class _LoanAppState extends State<LoanApp> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.all(padding * 2),
+                    padding: EdgeInsets.all(padding),
                     child: Text(
                         'Monthly payment of : ${monthlyResult.floorToDouble()}'),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(padding * 2),
+                    padding: EdgeInsets.all(padding),
                     child:
                         Text('Total payment : ${totalResult.floorToDouble()}'),
                   )
@@ -121,6 +123,21 @@ class _LoanAppState extends State<LoanApp> {
             ),
           ),
         ));
+  }
+
+  Widget getImageAsset() {
+    AssetImage assetImage = AssetImage('assets/images/money.png');
+    Image image = Image(
+      image: assetImage,
+      width: 125.0,
+      height: 125.0,
+      color: MyColors.colorPrimary,
+    );
+
+    return Container(
+      child: image,
+      margin: EdgeInsets.all(padding * 2),
+    );
   }
 
   String _validateValue(String value) {
@@ -144,6 +161,10 @@ class _LoanAppState extends State<LoanApp> {
     principalEditingController.text = "";
     interestEditingController.text = "";
     monthsEditingController.text = "";
+   setState(() {
+     monthlyResult = 0;
+     totalResult = 0;
+   });
   }
 
   void _handleSubmitted() {
